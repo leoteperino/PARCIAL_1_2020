@@ -781,6 +781,32 @@ int publi_contarPublicacionesActivasPorID(Publicacion* array, int limite, int id
 	return ret;
 }
 
+/**
+ * \brief Cuenta la cantidad de publicaciones que tiene un determinado Cliente, cuyo ID se le pasa por parametro
+ * \param array Array de Publicacion a ser actualizado
+ * \param limite int del array de Publicacion
+ * \param idPublicacion int ID de la Publicacion
+ * \return Retorna la cantidad de Publicaciones resultado de la suma o -1 (ERROR)
+ */
+int publi_contarPublicacionesPorID(Publicacion* array, int limite, int id)
+{
+	int ret = -1;
+	int i;
+	int contador = 0;
+	if(array!=NULL && limite>0 && id>0)
+	{
+		for(i=0; i<limite; i++)
+		{
+			if((array[i].IdCliente == id) && (array[i].isEmpty == FALSE))
+			{
+				contador++;
+			}
+		}
+		ret = contador;
+	}
+	return ret;
+}
+
 
 
 

@@ -52,7 +52,7 @@ int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,
 		{
 			if(arrayCli[i].isEmpty==FALSE)
 			{
-				contPublicaciones = publi_contarPublicacionesActivasPorID(arrayPubli, limitePubli, arrayCli[i].id);
+				contPublicaciones = publi_contarPublicacionesPorID(arrayPubli, limitePubli, arrayCli[i].id);
 				if(contPublicaciones > max)
 				{
 					max = contPublicaciones;

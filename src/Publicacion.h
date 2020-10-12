@@ -40,5 +40,6 @@ int publi_ActivarPublicacion(Publicacion* array, int limite, int id);
 int publi_imprimirCantidadPublicacionesDeClientes(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli);
 int publi_contarPublicacionesActivasPorID(Publicacion* array, int limite, int id);
 int publi_devolverIdClientePorIdPublicacion(Publicacion* array, int limite, int idPublicacion);
+int publi_contarPublicacionesPorID(Publicacion* array, int limite, int id);
 
 #endif /* PUBLICACION_H_ */
