@@ -21,6 +21,7 @@ int main(void) {
 	//Declaracion de variables y arrays
 	Cliente clientes[LENGTH_CLIENTE];
 	Publicacion publicaciones[LENGTH_PUBLI];
+	Rubro rubros[LENGTH_RUBROS];
 	int optionMenu;
 	int auxId;
 	int auxIndice;
@@ -28,6 +29,7 @@ int main(void) {
 	//Inicalizacion
 	cliente_inicializarArrayCliente(clientes,LENGTH_CLIENTE);
 	publi_inicializarArrayPublicacion(publicaciones, LENGTH_PUBLI);
+	info_inicializarRubro(rubros, LENGTH_RUBROS);
 	//Mocks Fantasmas
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente1", "Apellido1", "00-00000000-1");
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente2", "Apellido2", "00-00000000-2");
@@ -36,7 +38,7 @@ int main(void) {
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente5", "Apellido5", "00-00000000-5");
 	//Mocks Publicaciones
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 1",1);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 2",1);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 2",1);
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,20,"Texto 3",3);
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,10,"Texto 4",2);
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,45,"Texto 5",2);
@@ -321,6 +323,16 @@ int main(void) {
 								case 3:
 									printf("\n***************************************\n");
 									printf("3-Rubro con mas avisos\n");
+									if(publi_checkListaVacia(publicaciones, LENGTH_PUBLI)==-1)
+									{
+										printf("La lista de avisos esta vacia.\n");
+									}
+									else
+									{
+										printf("El rubro con mas avisos es:\n");
+										info_generarListaDeRubros(rubros,LENGTH_RUBROS,publicaciones);
+										info_calculaRubrosConMasAvisos(publicaciones, LENGTH_PUBLI, rubros, LENGTH_RUBROS);
+									}
 									printf("\n***************************************\n");
 									break;
 							}
