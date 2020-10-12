@@ -15,6 +15,7 @@
 #include "Cliente.h"
 #include "Publicacion.h"
 #include "utn.h"
+#include "Informes.h"
 
 int main(void) {
 	//Declaracion de variables y arrays
@@ -23,7 +24,7 @@ int main(void) {
 	int optionMenu;
 	int auxId;
 	int auxIndice;
-	//int cantAvisosPausados;
+	int cantAvisosPausados;
 	//Inicalizacion
 	cliente_inicializarArrayCliente(clientes,LENGTH_CLIENTE);
 	publi_inicializarArrayPublicacion(publicaciones, LENGTH_PUBLI);
@@ -282,39 +283,39 @@ int main(void) {
 								case 1:
 									printf("\n***************************************\n");
 									printf("1-Cliente con mas avisos\n");
-//									if(cliente_checkListaVacia(clientes,LENGTH_CLIENTE)==-1)
-//									{
-//										printf("La lista de clientes esta vacia.\n");
-//									}
-//									else
-//									{
-//										printf("El cliente con mayor cantidad de publicaciones es:\n");
-//										info_calculaClientesConMasAvisos(publicaciones,LENGTH_PUBLI,clientes,LENGTH_CLIENTE);
-//									}
+									if(cliente_checkListaVacia(clientes,LENGTH_CLIENTE)==-1)
+									{
+										printf("La lista de clientes esta vacia.\n");
+									}
+									else
+									{
+										printf("El cliente con mayor cantidad de publicaciones es:\n");
+										info_calculaClientesConMasAvisos(publicaciones,LENGTH_PUBLI,clientes,LENGTH_CLIENTE);
+									}
 									printf("\n***************************************\n");
 									break;
 								case 2:
 									printf("\n***************************************\n");
-//									printf("2-Cantidad de avisos pausados\n");
-//									if(publi_checkListaVacia(publicaciones, LENGTH_PUBLI)==-1)
-//									{
-//										printf("La lista de avisos esta vacia.\n");
-//									}
-//									else
-//									{
-//										cantAvisosPausados = info_calculaCantidadDePublicacionesPausadas(publicaciones, LENGTH_PUBLI);
-//										if(cantAvisosPausados>0)
-//										{
-//											printf("la cantidad de avisos pausados es: %d\n"
-//													"Lista de avisos pausados:\n",
-//													cantAvisosPausados);
-//											publi_imprimirArrayPublicacionPausadas(publicaciones, LENGTH_PUBLI);
-//										}
-//										else
-//										{
-//											printf("No hay avisos pausados en este momento.\n");
-//										}
-//									}
+									printf("2-Cantidad de avisos pausados\n");
+									if(publi_checkListaVacia(publicaciones, LENGTH_PUBLI)==-1)
+									{
+										printf("La lista de avisos esta vacia.\n");
+									}
+									else
+									{
+										cantAvisosPausados = info_calculaCantidadDePublicacionesPausadas(publicaciones, LENGTH_PUBLI);
+										if(cantAvisosPausados>0)
+										{
+											printf("la cantidad de avisos pausados es: %d\n"
+													"Lista de avisos pausados:\n",
+													cantAvisosPausados);
+											publi_imprimirArrayPublicacionPausadas(publicaciones, LENGTH_PUBLI);
+										}
+										else
+										{
+											printf("No hay avisos pausados en este momento.\n");
+										}
+									}
 									printf("\n***************************************\n");
 									break;
 								case 3:
