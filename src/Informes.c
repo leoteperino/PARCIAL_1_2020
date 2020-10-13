@@ -40,14 +40,15 @@ int info_calculaCantidadDePublicacionesPausadas(Publicacion* array, int limite)
  * \param limiteCli Limite del Clientes de Publicacion
  * \return Retorna int numero maximo de Publicaciones contratadas por el mismo cliente (EXITO) y -1 (ERROR)
  */
-int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli)
+int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli, int id)
 {
 	int ret = -1;
 	int i;
 	int contPublicaciones;
-	int max = 0;
+	int max;
 	if(arrayPubli != NULL && limitePubli > 0 && arrayCli != NULL && limiteCli > 0)
 	{
+		max = info_devolverPrimerAvisoContado(arrayPubli, limitePubli, id);
 		for(i=0;i<limiteCli;i++)
 		{
 			if(arrayCli[i].isEmpty==FALSE)
@@ -65,6 +66,33 @@ int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,
 }
 
 /**
+ * \brief Devuelve el primer aviso contado
+ * \param array Array de Publicacion a ser actualizado
+ * \param limite int del array de Publicacion
+ * \param id int ID de la Publicacion
+ * \return Retorna la cantidad de Publicaciones resultado de la suma o -1 (ERROR)
+ */
+int info_devolverPrimerAvisoContado(Publicacion* array, int limite, int id)
+{
+	int ret = -1;
+	int i;
+	int contador = 0;
+	if(array!=NULL && limite>0 && id>0)
+	{
+		for(i=0; i<limite; i++)
+		{
+			if((array[i].IdCliente == id) && (array[i].isEmpty == FALSE))
+			{
+				contador++;
+				break;
+			}
+		}
+		ret = contador;
+	}
+	return ret;
+}
+
+/**
  * \brief Imprime los datos del Cliente con mas avisos publicados
  * \param arrayPubli Array de Publicacion a ser actualizado
  * \param limitePubli Limite del array de Publicacion
@@ -77,7 +105,6 @@ int info_calculaClientesConMasAvisos(Publicacion* arrayPubli,int limitePubli,Cli
 	int ret = -1;
 	int i;
 	int contPublicaciones;
-	int auxId;
 	int auxMayor;
 	if(arrayPubli != NULL && limitePubli > 0 && arrayCli != NULL && limiteCli > 0)
 	{
@@ -92,9 +119,8 @@ int info_calculaClientesConMasAvisos(Publicacion* arrayPubli,int limitePubli,Cli
 			{
 				if(arrayCli[i].isEmpty==FALSE)
 				{
-					auxId = arrayCli[i].id;
-					contPublicaciones = publi_contarPublicacionesActivasPorID(arrayPubli, limitePubli, auxId);
-					auxMayor = info_DevolverCantMayorPublicaciones(arrayPubli, LENGTH_PUBLI, arrayCli, LENGTH_CLIENTE);
+					contPublicaciones = publi_contarPublicacionesPorID(arrayPubli, limitePubli, arrayCli[i].id);
+					auxMayor = info_DevolverCantMayorPublicaciones(arrayPubli, LENGTH_PUBLI, arrayCli, LENGTH_CLIENTE, arrayCli[i].id);
 					if(contPublicaciones == auxMayor)
 					{
 						printf("ID:%d - Nombre:%s - Apellido:%s - Cuit:%s - Cantidad de Avisos:%d\n",
@@ -110,7 +136,11 @@ int info_calculaClientesConMasAvisos(Publicacion* arrayPubli,int limitePubli,Cli
 	}
 	return ret;
 }
-
+/*********************************/
+/*********************************/
+/*Informe 3 Rubro con mas avisos*/
+/*********************************/
+/*********************************/
 /**
  * \brief Inicializa la entidad Rubro y coloca todos los campos isEmpty vacios.
  * \param Rubro array de Rubros a ser inicializado
@@ -187,14 +217,14 @@ int info_estaEnMiListaDeRubros(Rubro* array,int limite,int rubro)
  * \param Publicacion arrayPubli array de Publicaciones
  * \return Retorna -1[ERROR] y 0[EXITO]
  */
-int info_generarListaDeRubros(Rubro* arrayRubro,int limiteRubro,Publicacion* arrayPubli)
+int info_generarListaDeRubros(Rubro* arrayRubro,int limiteRubro,Publicacion* arrayPubli, int limitePubli)
 {
 	int ret = -1;
 	if(arrayRubro!=NULL && limiteRubro>0 && arrayPubli!=NULL)
 	{
 		int indexPubli;
 		int indexRubro=0;
-		for(indexPubli=0;indexPubli<limiteRubro;indexPubli++)
+		for(indexPubli=0;indexPubli<limitePubli;indexPubli++)
 		{
 			if(arrayPubli[indexPubli].isEmpty == FALSE)
 			{
@@ -238,6 +268,33 @@ int info_contarPublicacionesPorRubro(Publicacion* array, int limite, int rubro)
 }
 
 /**
+ * \brief Cuenta la cantidad de publicaciones que tiene un determinado Rubro y devuelve la primera que cuenta
+ * \param Publicacion array Array de Publicacion a ser recorrido
+ * \param limite int del array de Publicacion
+ * \param rubro int rubro de publicacion.
+ * \return Retorna la cantidad de Publicaciones resultado de la suma o -1 (ERROR)
+ */
+int info_devolverPrimerCantPublicacionesPorRubro(Publicacion* array, int limite, int rubro)
+{
+	int ret = -1;
+	int i;
+	int contador = 0;
+	if(array!=NULL && limite>0 && rubro>0)
+	{
+		for(i=0; i<limite; i++)
+		{
+			if((array[i].rubro == rubro) && (array[i].isEmpty == FALSE))
+			{
+				contador++;
+				break;
+			}
+		}
+		ret = contador;
+	}
+	return ret;
+}
+
+/**
  * \brief Imprime la cantidad mayor de las publicaciones que tiene un rubro determinado.
  * \param arrayPubli Array de Publicacion a ser actualizado
  * \param limitePubli Limite del array de Publicacion
@@ -245,14 +302,15 @@ int info_contarPublicacionesPorRubro(Publicacion* array, int limite, int rubro)
  * \param limiteRubro Limite del Rubros de Publicacion
  * \return Retorna int numero maximo de Publicaciones contratadas por el mismo Rubro (EXITO) y -1 (ERROR)
  */
-int info_DevolverCantMayorPublicacionesPorRubros(Publicacion* arrayPubli,int limitePubli,Rubro* arrayRubro,int limiteRubro)
+int info_DevolverCantMayorPublicacionesPorRubros(Publicacion* arrayPubli,int limitePubli,Rubro* arrayRubro,int limiteRubro, int rubro)
 {
 	int ret = -1;
 	int i;
 	int contPublicaciones;
-	int max = 0;
+	int max;
 	if(arrayPubli != NULL && limitePubli > 0 && arrayRubro != NULL && limiteRubro > 0)
 	{
+		max = info_devolverPrimerCantPublicacionesPorRubro(arrayPubli, limitePubli, rubro);
 		for(i=0;i<limiteRubro;i++)
 		{
 			if(arrayRubro[i].isEmpty==FALSE)
@@ -282,7 +340,6 @@ int info_calculaRubrosConMasAvisos(Publicacion* arrayPubli,int limitePubli,Rubro
 	int ret = -1;
 	int i;
 	int contRubros;
-	int auxRubro;
 	int auxMayor;
 	if(arrayPubli != NULL && limitePubli > 0 && arrayRubro != NULL && limiteRubro > 0)
 	{
@@ -297,9 +354,8 @@ int info_calculaRubrosConMasAvisos(Publicacion* arrayPubli,int limitePubli,Rubro
 			{
 				if(arrayRubro[i].isEmpty==FALSE)
 				{
-					auxRubro = arrayRubro[i].rubro;
-					contRubros = info_contarPublicacionesPorRubro(arrayPubli, LENGTH_PUBLI, auxRubro);
-					auxMayor = info_DevolverCantMayorPublicacionesPorRubros(arrayPubli, limitePubli, arrayRubro, limiteRubro);
+					contRubros = info_contarPublicacionesPorRubro(arrayPubli, LENGTH_PUBLI, arrayRubro[i].rubro);
+					auxMayor = info_DevolverCantMayorPublicacionesPorRubros(arrayPubli, limitePubli, arrayRubro, limiteRubro,arrayRubro[i].rubro);
 					if(contRubros == auxMayor)
 					{
 						printf("Rubro:%d - Cantidad de Avisos:%d\n",

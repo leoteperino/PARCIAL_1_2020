@@ -239,7 +239,7 @@ int publi_devolverIdClientePorIdPublicacion(Publicacion* array, int limite, int 
 {
 	int ret=-1;
 	int i;
-	int auxIdCliente = 1;
+	int auxIdCliente;
 	if(array != NULL && limite > 0)
 	{
 		for(i=0;i<limite;i++)
@@ -292,8 +292,8 @@ int publi_PausarPublicacion(Publicacion* array, int limite, int id)
 							ret = 0;
 						}
 					}
-			 		break;
 			 		printf("La publicacion ha sido pausada.\n");
+			 		break;
 			 	case 'n':
 			 	case 'N':
 			 		break;
@@ -340,8 +340,8 @@ int publi_ActivarPublicacion(Publicacion* array, int limite, int id)
 							ret = 0;
 						}
 					}
-			 		break;
 			 		printf("La publicacion ha sido activada.\n");
+			 		break;
 			 	case 'n':
 			 	case 'N':
 			 		break;
@@ -735,21 +735,24 @@ int publi_imprimirCantidadPublicacionesDeClientes(Publicacion* arrayPubli,int li
 	int auxId;
 	if(arrayPubli != NULL && limitePubli > 0 && arrayCli != NULL && limiteCli > 0)
 	{
-		ret=0;
 		for(i=0;i<limiteCli;i++)
 		{
 			if(arrayCli[i].isEmpty==FALSE)
 			{
 				auxId = arrayCli[i].id;
 				contPublicaciones = publi_contarPublicacionesActivasPorID(arrayPubli, limitePubli, auxId);
-				printf("ID:%d - Nombre:%s - Apellido:%s - Cuit:%s - Cantidad de Avisos Activos:%d\n",
-						arrayCli[i].id,
-						arrayCli[i].nombre,
-						arrayCli[i].apellido,
-						arrayCli[i].cuit,
-						contPublicaciones);
+				if(contPublicaciones!=0)
+				{
+					printf("ID:%d - Nombre:%s - Apellido:%s - Cuit:%s - Cantidad de Avisos Activos:%d\n",
+							arrayCli[i].id,
+							arrayCli[i].nombre,
+							arrayCli[i].apellido,
+							arrayCli[i].cuit,
+							contPublicaciones);
+				}
 			}
 		}
+		ret=0;
 	}
 	return ret;
 }

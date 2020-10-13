@@ -37,11 +37,12 @@ int main(void) {
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente4", "Apellido4", "00-00000000-4");
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente5", "Apellido5", "00-00000000-5");
 	//Mocks Publicaciones
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 1",1);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 2",1);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,20,"Texto 3",3);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,10,"Texto 4",2);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,45,"Texto 5",2);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 1",5);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 2",5);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,3,"Texto 3",4);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,4,"Texto 4",5);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,6,"Texto 5",5);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,6,"Texto 6",1);
 	//Menu Principal
 	do
 	{
@@ -185,8 +186,7 @@ int main(void) {
 									{
 										if(!publi_PausarPublicacion(publicaciones,LENGTH_PUBLI,auxId))
 										{
-											printf("La publicacion se ha pausado.\n"
-													"Lista actualizada de Publicaciones:\n");
+											printf("Lista actualizada de Publicaciones:\n");
 											publi_imprimirArrayPublicacion(publicaciones, LENGTH_PUBLI);
 										}
 									}
@@ -230,8 +230,7 @@ int main(void) {
 									{
 										if(!publi_ActivarPublicacion(publicaciones,LENGTH_PUBLI,auxId))
 										{
-											printf("La publicacion se ha Activado.\n"
-													"Lista actualizada de Publicaciones:\n");
+											printf("Lista actualizada de Publicaciones:\n");
 											publi_imprimirArrayPublicacion(publicaciones, LENGTH_PUBLI);
 										}
 									}
@@ -291,7 +290,7 @@ int main(void) {
 									}
 									else
 									{
-										printf("El cliente con mayor cantidad de publicaciones es:\n");
+										printf("El cliente con mayor cantidad de avisos es:\n");
 										info_calculaClientesConMasAvisos(publicaciones,LENGTH_PUBLI,clientes,LENGTH_CLIENTE);
 									}
 									printf("\n***************************************\n");
@@ -330,7 +329,7 @@ int main(void) {
 									else
 									{
 										printf("El rubro con mas avisos es:\n");
-										info_generarListaDeRubros(rubros,LENGTH_RUBROS,publicaciones);
+										info_generarListaDeRubros(rubros,LENGTH_RUBROS,publicaciones,LENGTH_PUBLI);
 										info_calculaRubrosConMasAvisos(publicaciones, LENGTH_PUBLI, rubros, LENGTH_RUBROS);
 									}
 									printf("\n***************************************\n");
