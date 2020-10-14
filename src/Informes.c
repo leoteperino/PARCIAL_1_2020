@@ -32,65 +32,67 @@ int info_calculaCantidadDePublicacionesPausadas(Publicacion* array, int limite)
 	return ret;
 }
 
-/**
- * \brief Imprime la cantidad mayor de las publicaciones contratadas x el mismo cliente.
- * \param arrayPubli Array de Publicacion a ser actualizado
- * \param limitePubli Limite del array de Publicacion
- * \param arrayCli Array de Clientes a ser actualizado
- * \param limiteCli Limite del Clientes de Publicacion
- * \return Retorna int numero maximo de Publicaciones contratadas por el mismo cliente (EXITO) y -1 (ERROR)
- */
-int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli, int id)
-{
-	int ret = -1;
-	int i;
-	int contPublicaciones;
-	int max;
-	if(arrayPubli != NULL && limitePubli > 0 && arrayCli != NULL && limiteCli > 0)
-	{
-		max = info_devolverPrimerAvisoContado(arrayPubli, limitePubli, id);
-		for(i=0;i<limiteCli;i++)
-		{
-			if(arrayCli[i].isEmpty==FALSE)
-			{
-				contPublicaciones = publi_contarPublicacionesPorID(arrayPubli, limitePubli, arrayCli[i].id);
-				if(contPublicaciones > max)
-				{
-					max = contPublicaciones;
-				}
-			}
-		}
-		ret = max;
-	}
-	return ret;
-}
+///**
+// * \brief Imprime la cantidad mayor de las publicaciones contratadas x el mismo cliente.
+// * \param arrayPubli Array de Publicacion a ser actualizado
+// * \param limitePubli Limite del array de Publicacion
+// * \param arrayCli Array de Clientes a ser actualizado
+// * \param limiteCli Limite del Clientes de Publicacion
+// * \return Retorna int numero maximo de Publicaciones contratadas por el mismo cliente (EXITO) y -1 (ERROR)
+// */
+//int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli, int id)
+//{
+//	int ret = -1;
+//	int i;
+//	int contPublicaciones;
+//	int max;
+//	if(arrayPubli != NULL && limitePubli > 0 && arrayCli != NULL && limiteCli > 0)
+//	{
+//		max = info_devolverPrimerAvisoContado(arrayPubli, limitePubli, id);
+//		for(i=0;i<limiteCli;i++)
+//		{
+//			if(arrayCli[i].isEmpty==FALSE)
+//			{
+//				contPublicaciones = publi_contarPublicacionesPorID(arrayPubli, limitePubli, arrayCli[i].id);
+//				if(contPublicaciones > max)
+//				{
+//					max = contPublicaciones;
+//				}
+//			}
+//		}
+//		ret = max;
+//	}
+//	return ret;
+//}
 
-/**
- * \brief Devuelve el primer aviso contado
- * \param array Array de Publicacion a ser actualizado
- * \param limite int del array de Publicacion
- * \param id int ID de la Publicacion
- * \return Retorna la cantidad de Publicaciones resultado de la suma o -1 (ERROR)
- */
-int info_devolverPrimerAvisoContado(Publicacion* array, int limite, int id)
-{
-	int ret = -1;
-	int i;
-	int contador = 0;
-	if(array!=NULL && limite>0 && id>0)
-	{
-		for(i=0; i<limite; i++)
-		{
-			if((array[i].IdCliente == id) && (array[i].isEmpty == FALSE))
-			{
-				contador++;
-				break;
-			}
-		}
-		ret = contador;
-	}
-	return ret;
-}
+///**
+// * \brief Devuelve el primer aviso contado
+// * \param array Array de Publicacion a ser actualizado
+// * \param limite int del array de Publicacion
+// * \param id int ID de la Publicacion
+// * \return Retorna la cantidad de Publicaciones resultado de la suma o -1 (ERROR)
+// */
+//int info_devolverPrimerAvisoContado(Publicacion* array, int limite, int id)
+//{
+//	int ret = -1;
+//	int i;
+//	int contador = 0;
+//	if(array!=NULL && limite>0 && id>0)
+//	{
+//		for(i=0; i<limite; i++)
+//		{
+//			if((array[i].IdCliente == id) && (array[i].isEmpty == FALSE))
+//			{
+//				if(i==0)
+//				{
+//					contador++;
+//				}
+//			}
+//		}
+//		ret = contador;
+//	}
+//	return ret;
+//}
 
 /**
  * \brief Imprime los datos del Cliente con mas avisos publicados
@@ -120,8 +122,8 @@ int info_calculaClientesConMasAvisos(Publicacion* arrayPubli,int limitePubli,Cli
 				if(arrayCli[i].isEmpty==FALSE)
 				{
 					contPublicaciones = publi_contarPublicacionesPorID(arrayPubli, limitePubli, arrayCli[i].id);
-					auxMayor = info_DevolverCantMayorPublicaciones(arrayPubli, LENGTH_PUBLI, arrayCli, LENGTH_CLIENTE, arrayCli[i].id);
-					if(contPublicaciones == auxMayor)
+					auxMayor = info_DevolverCantMayorPublicaciones(arrayPubli, limitePubli, arrayCli, limiteCli,arrayCli[i].id);
+					if(auxMayor == contPublicaciones)
 					{
 						printf("ID:%d - Nombre:%s - Apellido:%s - Cuit:%s - Cantidad de Avisos:%d\n",
 								arrayCli[i].id,
@@ -136,6 +138,43 @@ int info_calculaClientesConMasAvisos(Publicacion* arrayPubli,int limitePubli,Cli
 	}
 	return ret;
 }
+
+/**
+ * \brief Imprime la cantidad mayor de las publicaciones que tiene un id determinado.
+ * \param arrayPubli Array de Publicacion a ser actualizado
+ * \param limitePubli Limite del array de Publicacion
+ * \param arrayCliente Array de clientes a ser actualizado
+ * \param limiteCliente Limite del array cliente
+ * \return Retorna int numero maximo de Publicaciones contratadas por el mismo id (EXITO) y -1 (ERROR)
+ */
+int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCliente,int limiteCliente, int id)
+{
+	int ret = -1;
+	int i;
+	int contPublicaciones;
+	int max;
+	if(arrayPubli != NULL && limitePubli > 0 && arrayCliente != NULL && limiteCliente > 0)
+	{
+		for(i=0;i<limiteCliente;i++)
+		{
+			if(arrayCliente[i].isEmpty==FALSE)
+			{
+				contPublicaciones = publi_contarPublicacionesPorID(arrayPubli, limitePubli, arrayCliente[i].id);
+				if(i==0)
+				{
+					max = contPublicaciones;
+				}
+				else if(contPublicaciones > max)
+				{
+					max = contPublicaciones;
+				}
+			}
+		}
+		ret = max;
+	}
+	return ret;
+}
+
 /*********************************/
 /*********************************/
 /*Informe 3 Rubro con mas avisos*/
@@ -267,32 +306,6 @@ int info_contarPublicacionesPorRubro(Publicacion* array, int limite, int rubro)
 	return ret;
 }
 
-/**
- * \brief Cuenta la cantidad de publicaciones que tiene un determinado Rubro y devuelve la primera que cuenta
- * \param Publicacion array Array de Publicacion a ser recorrido
- * \param limite int del array de Publicacion
- * \param rubro int rubro de publicacion.
- * \return Retorna la cantidad de Publicaciones resultado de la suma o -1 (ERROR)
- */
-int info_devolverPrimerCantPublicacionesPorRubro(Publicacion* array, int limite, int rubro)
-{
-	int ret = -1;
-	int i;
-	int contador = 0;
-	if(array!=NULL && limite>0 && rubro>0)
-	{
-		for(i=0; i<limite; i++)
-		{
-			if((array[i].rubro == rubro) && (array[i].isEmpty == FALSE))
-			{
-				contador++;
-				break;
-			}
-		}
-		ret = contador;
-	}
-	return ret;
-}
 
 /**
  * \brief Imprime la cantidad mayor de las publicaciones que tiene un rubro determinado.
@@ -310,13 +323,16 @@ int info_DevolverCantMayorPublicacionesPorRubros(Publicacion* arrayPubli,int lim
 	int max;
 	if(arrayPubli != NULL && limitePubli > 0 && arrayRubro != NULL && limiteRubro > 0)
 	{
-		max = info_devolverPrimerCantPublicacionesPorRubro(arrayPubli, limitePubli, rubro);
 		for(i=0;i<limiteRubro;i++)
 		{
 			if(arrayRubro[i].isEmpty==FALSE)
 			{
 				contPublicaciones = info_contarPublicacionesPorRubro(arrayPubli, LENGTH_PUBLI, arrayRubro[i].rubro);
-				if(contPublicaciones > max)
+				if(i==0)
+				{
+					max = contPublicaciones;
+				}
+				else if(contPublicaciones > max)
 				{
 					max = contPublicaciones;
 				}

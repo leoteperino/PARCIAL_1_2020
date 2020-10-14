@@ -37,11 +37,11 @@ int main(void) {
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente4", "Apellido4", "00-00000000-4");
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente5", "Apellido5", "00-00000000-5");
 	//Mocks Publicaciones
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 1",5);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 2",5);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 1",4);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 2",3);
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,3,"Texto 3",4);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,4,"Texto 4",5);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,6,"Texto 5",5);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,4,"Texto 4",1);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,6,"Texto 5",1);
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,6,"Texto 6",1);
 	//Menu Principal
 	do
