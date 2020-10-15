@@ -66,7 +66,7 @@ int info_calculaClientesConMasAvisos(Publicacion* arrayPubli,int limitePubli,Cli
 					que se le paso*/
 					contPublicaciones = publi_contarPublicacionesPorID(arrayPubli, limitePubli, arrayCli[i].id);
 					//Devuelve la Mayor Publicacion contada
-					auxMayor = info_DevolverCantMayorPublicaciones(arrayPubli, limitePubli, arrayCli, limiteCli,arrayCli[i].id);
+					auxMayor = info_DevolverCantMayorPublicaciones(arrayPubli, limitePubli, arrayCli, limiteCli);
 					//Comparo y si la mayor Publicacion coincide con alguna de las Publicaciones contadas, esa es la mayor.
 					if(auxMayor == contPublicaciones)
 					{
@@ -92,7 +92,7 @@ int info_calculaClientesConMasAvisos(Publicacion* arrayPubli,int limitePubli,Cli
  * \param limiteCliente Limite del array cliente
  * \return Retorna int numero maximo de Publicaciones contratadas por el mismo id (EXITO) y -1 (ERROR)
  */
-int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCliente,int limiteCliente, int id)
+int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCliente,int limiteCliente)
 {
 	int ret = -1;
 	int i;
@@ -260,7 +260,7 @@ int info_contarPublicacionesPorRubro(Publicacion* array, int limite, int rubro)
  * \param limiteRubro Limite del Rubros de Publicacion
  * \return Retorna int numero maximo de Publicaciones contratadas por el mismo Rubro (EXITO) y -1 (ERROR)
  */
-int info_DevolverCantMayorPublicacionesPorRubros(Publicacion* arrayPubli,int limitePubli,Rubro* arrayRubro,int limiteRubro, int rubro)
+int info_DevolverCantMayorPublicacionesPorRubros(Publicacion* arrayPubli,int limitePubli,Rubro* arrayRubro,int limiteRubro)
 {
 	int ret = -1;
 	int i;
@@ -316,7 +316,7 @@ int info_calculaRubrosConMasAvisos(Publicacion* arrayPubli,int limitePubli,Rubro
 				if(arrayRubro[i].isEmpty==FALSE)
 				{
 					contRubros = info_contarPublicacionesPorRubro(arrayPubli, LENGTH_PUBLI, arrayRubro[i].rubro);
-					auxMayor = info_DevolverCantMayorPublicacionesPorRubros(arrayPubli, limitePubli, arrayRubro, limiteRubro,arrayRubro[i].rubro);
+					auxMayor = info_DevolverCantMayorPublicacionesPorRubros(arrayPubli, limitePubli, arrayRubro, limiteRubro);
 					if(contRubros == auxMayor)
 					{
 						printf("Rubro:%d - Cantidad de Avisos:%d\n",
@@ -329,5 +329,6 @@ int info_calculaRubrosConMasAvisos(Publicacion* arrayPubli,int limitePubli,Rubro
 	}
 	return ret;
 }
+
 
 
