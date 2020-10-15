@@ -37,12 +37,12 @@ int main(void) {
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente4", "Apellido4", "00-00000000-4");
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente5", "Apellido5", "00-00000000-5");
 	//Mocks Publicaciones
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 1",1);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 1",4);
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 2",4);
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 3",4);
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 4",3);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,3,"Texto 5",5);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,3,"Texto 6",4);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,3,"Texto 5",3);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,3,"Texto 6",3);
 	//Menu Principal
 	do
 	{
@@ -274,7 +274,9 @@ int main(void) {
 											"1-Cliente con mas avisos\n"
 											"2-Cantidad de avisos pausados\n"
 											"3-Rubro con mas avisos\n"
-											"4-Volver al Menu Principal.\n"
+								            "4-Cliente con mas avisos activos\n"
+								            "5-Cliente con mas avisos pausados\n"
+											"6-Volver al Menu Principal.\n"
 											"-----------------------------\n"
 											"Elija una Opcion del Menu: ",
 											"ERROR",MIN_OPTION_MENU,MAX_OPTION_MENU_INFO,QTY_REINT))
@@ -334,9 +336,40 @@ int main(void) {
 									}
 									printf("\n***************************************\n");
 									break;
+								case 4:
+									printf("\n***************************************\n");
+									printf("4-Cliente con mas avisos activos\n");
+									if(cliente_checkListaVacia(clientes,LENGTH_CLIENTE)==-1)
+									{
+										printf("La lista de clientes esta vacia.\n");
+									}
+									else
+									{
+										printf("El cliente con mayor cantidad de avisos activos es:\n");
+										info_calculaClientesConMasAvisosActivos(publicaciones, LENGTH_PUBLI, clientes, LENGTH_CLIENTE);
+									}
+									printf("\n***************************************\n");
+									break;
+								case 5:
+									printf("\n***************************************\n");
+									printf("5-Cliente con mas avisos Pausados\n");
+									if(cliente_checkListaVacia(clientes,LENGTH_CLIENTE)==-1)
+									{
+										printf("La lista de clientes esta vacia.\n");
+									}
+									else
+									{
+										printf("El cliente con mayor cantidad de avisos pausados es:\n");
+										//info_calculaClientesConMasAvisosPausados(publicaciones, LENGTH_PUBLI, clientes, LENGTH_CLIENTE);
+//										auxId =info_contarPublicacionesPorIDPausadas(publicaciones, LENGTH_PUBLI, 4);
+//										printf("%d", auxId);
+										info_calculaClientesConMasAvisosPausados(publicaciones, LENGTH_PUBLI, clientes, LENGTH_CLIENTE);
+									}
+									printf("\n***************************************\n");
+									break;
 							}
 						}
-					}while(optionMenu!=4);
+					}while(optionMenu!=6);
 				printf("\n***************************************\n");
 				break;
 			}

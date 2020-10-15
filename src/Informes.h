@@ -19,5 +19,11 @@ int info_calculaRubrosConMasAvisos(Publicacion* arrayPubli,int limitePubli,Rubro
 int info_contarPublicacionesPorRubro(Publicacion* array, int limite, int rubro);
 int info_DevolverCantMayorPublicacionesPorRubros(Publicacion* arrayPubli,int limitePubli,Rubro* arrayRubro,int limiteRubro);
 int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCliente,int limiteCliente);
+int info_calculaClientesConMasAvisosActivos(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli);
+int info_contarPublicacionesPorIDActivas(Publicacion* array, int limite, int id);
+int info_contarPublicacionesPorIDPausadas(Publicacion* array, int limite, int id);
+int info_calculaClientesConMasAvisosPausados(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli);
+int info_DevolverCantMayorPublicacionesActivas(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCliente,int limiteCliente);
+int info_DevolverCantMayorPublicacionesPausadas(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCliente,int limiteCliente);
 
 #endif /* INFORMES_H_ */

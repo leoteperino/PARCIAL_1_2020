@@ -10,7 +10,7 @@
 #define QTY_REINT 2
 #define MIN_OPTION_MENU 1
 #define MAX_OPTION_MENU 8
-#define MAX_OPTION_MENU_INFO 4
+#define MAX_OPTION_MENU_INFO 6
 #define MIN_ID 1
 #define MAX_ID 999999999
 

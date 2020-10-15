@@ -330,5 +330,218 @@ int info_calculaRubrosConMasAvisos(Publicacion* arrayPubli,int limitePubli,Rubro
 	return ret;
 }
 
+/**
+ * \brief Imprime la cantidad mayor de las publicaciones activas que tiene un id determinado.
+ * \param arrayPubli Array de Publicacion a ser actualizado
+ * \param limitePubli Limite del array de Publicacion
+ * \param arrayCliente Array de clientes a ser actualizado
+ * \param limiteCliente Limite del array cliente
+ * \return Retorna int numero maximo de Publicaciones contratadas por el mismo id (EXITO) y -1 (ERROR)
+ */
+int info_DevolverCantMayorPublicacionesActivas(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCliente,int limiteCliente)
+{
+	int ret = -1;
+	int i;
+	int contPublicaciones;
+	int max;
+	if(arrayPubli != NULL && limitePubli > 0 && arrayCliente != NULL && limiteCliente > 0)
+	{
+		for(i=0;i<limiteCliente;i++)
+		{
+			if(arrayCliente[i].isEmpty==FALSE)
+			{
+				contPublicaciones = info_contarPublicacionesPorIDActivas(arrayPubli, limitePubli, arrayCliente[i].id);
+				if(i==0)
+				{
+					max = contPublicaciones;
+				}
+				else if(contPublicaciones > max)
+				{
+					max = contPublicaciones;
+				}
+			}
+		}
+		ret = max;
+	}
+	return ret;
+}
 
+/**
+ * \brief Cuenta la cantidad de publicaciones activas que tiene un determinado Cliente, cuyo ID se le pasa por parametro
+ * \param array Array de Publicacion a ser actualizado
+ * \param limite int del array de Publicacion
+ * \param idPublicacion int ID de la Publicacion
+ * \return Retorna la cantidad de Publicaciones resultado de la suma o -1 (ERROR)
+ */
+int info_contarPublicacionesPorIDActivas(Publicacion* array, int limite, int id)
+{
+	int ret = -1;
+	int i;
+	int contador = 0;
+	if(array!=NULL && limite>0 && id>0)
+	{
+		for(i=0; i<limite; i++)
+		{
+			if( (array[i].IdCliente == id) &&
+				(array[i].isEmpty == FALSE) &&
+				(array[i].estado == ESTADO_ACTIVA))
+			{
+				contador++;
+			}
+		}
+		ret = contador;
+	}
+	return ret;
+}
 
+/**
+ * \brief Imprime los datos del Cliente con mas avisos publicados y activos
+ * \param arrayPubli Array de Publicacion a ser actualizado
+ * \param limitePubli Limite del array de Publicacion
+ * \param arrayCli Array de Clientes a ser actualizado
+ * \param limiteCli Limite del Clientes de Publicacion
+ * \return Retorna 0 (EXITO) y -1 (ERROR)
+ */
+int info_calculaClientesConMasAvisosActivos(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli)
+{
+	int ret = -1;
+	int i;
+	int contPublicaciones;
+	int auxMayor;
+	if(arrayPubli != NULL && limitePubli > 0 && arrayCli != NULL && limiteCli > 0)
+	{
+		if(publi_checkListaVacia(arrayPubli, limitePubli)==-1)
+		{
+			printf("la lista de avisos esta vacia.\n");
+		}
+		else
+		{
+			ret=0;
+			for(i=0;i<limiteCli;i++)
+			{
+				if(arrayCli[i].isEmpty==FALSE)
+				{
+					contPublicaciones = info_contarPublicacionesPorIDActivas(arrayPubli, limitePubli, arrayCli[i].id);
+					auxMayor = info_DevolverCantMayorPublicaciones(arrayPubli, limitePubli, arrayCli, limiteCli);
+					if(auxMayor == contPublicaciones)
+					{
+						printf("Nombre:%s - Apellido:%s - Cuit:%s - Cantidad de Avisos:%d\n",
+								arrayCli[i].nombre,
+								arrayCli[i].apellido,
+								arrayCli[i].cuit,
+								contPublicaciones);
+					}
+				}
+			}
+		}
+	}
+	return ret;
+}
+
+/**
+ * \brief Cuenta la cantidad de publicaciones activas que tiene un determinado Cliente, cuyo ID se le pasa por parametro
+ * \param array Array de Publicacion a ser actualizado
+ * \param limite int del array de Publicacion
+ * \param idPublicacion int ID de la Publicacion
+ * \return Retorna la cantidad de Publicaciones resultado de la suma o -1 (ERROR)
+ */
+int info_contarPublicacionesPorIDPausadas(Publicacion* array, int limite, int id)
+{
+	int ret = -1;
+	int i;
+	int contador = 0;
+	if(array!=NULL && limite>0 && id>0)
+	{
+		for(i=0; i<limite; i++)
+		{
+			if( (array[i].IdCliente == id) &&
+				(array[i].isEmpty == FALSE) &&
+				(array[i].estado == ESTADO_PAUSADA))
+			{
+				contador++;
+			}
+		}
+		ret = contador;
+	}
+	return ret;
+}
+
+/**
+ * \brief Imprime la cantidad mayor de las publicaciones pausadas que tiene un id determinado.
+ * \param arrayPubli Array de Publicacion a ser actualizado
+ * \param limitePubli Limite del array de Publicacion
+ * \param arrayCliente Array de clientes a ser actualizado
+ * \param limiteCliente Limite del array cliente
+ * \return Retorna int numero maximo de Publicaciones contratadas por el mismo id (EXITO) y -1 (ERROR)
+ */
+int info_DevolverCantMayorPublicacionesPausadas(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCliente,int limiteCliente)
+{
+	int ret = -1;
+	int i;
+	int contPublicaciones;
+	int max;
+	if(arrayPubli != NULL && limitePubli > 0 && arrayCliente != NULL && limiteCliente > 0)
+	{
+		for(i=0;i<limiteCliente;i++)
+		{
+			if(arrayCliente[i].isEmpty==FALSE)
+			{
+				contPublicaciones = info_contarPublicacionesPorIDPausadas(arrayPubli, limitePubli, arrayCliente[i].id);
+				if(i==0)
+				{
+					max = contPublicaciones;
+				}
+				else if(contPublicaciones > max)
+				{
+					max = contPublicaciones;
+				}
+			}
+		}
+		ret = max;
+	}
+	return ret;
+}
+
+/**
+ * \brief Imprime los datos del Cliente con mas avisos pausados
+ * \param arrayPubli Array de Publicacion a ser actualizado
+ * \param limitePubli Limite del array de Publicacion
+ * \param arrayCli Array de Clientes a ser actualizado
+ * \param limiteCli Limite del Clientes de Publicacion
+ * \return Retorna 0 (EXITO) y -1 (ERROR)
+ */
+int info_calculaClientesConMasAvisosPausados(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli)
+{
+	int ret = -1;
+	int i;
+	int contPublicaciones;
+	int auxMayor;
+	if(arrayPubli != NULL && limitePubli > 0 && arrayCli != NULL && limiteCli > 0)
+	{
+		if(publi_checkListaVacia(arrayPubli, limitePubli)==-1)
+		{
+			printf("la lista de avisos esta vacia.\n");
+		}
+		else
+		{
+			ret=0;
+			for(i=0;i<limiteCli;i++)
+			{
+				if(arrayCli[i].isEmpty==FALSE)
+				{
+					contPublicaciones = info_contarPublicacionesPorIDPausadas(arrayPubli, LENGTH_PUBLI,arrayCli[i].id);
+					auxMayor = info_DevolverCantMayorPublicacionesPausadas(arrayPubli, limitePubli, arrayCli, limiteCli);
+					if(auxMayor == contPublicaciones)
+					{
+						printf("Nombre:%s - Apellido:%s - Cuit:%s - Cantidad de Avisos:%d\n",
+								arrayCli[i].nombre,
+								arrayCli[i].apellido,
+								arrayCli[i].cuit,
+								contPublicaciones);
+					}
+				}
+			}
+		}
+	}
+	return ret;
+}
