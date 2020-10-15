@@ -32,67 +32,6 @@ int info_calculaCantidadDePublicacionesPausadas(Publicacion* array, int limite)
 	return ret;
 }
 
-///**
-// * \brief Imprime la cantidad mayor de las publicaciones contratadas x el mismo cliente.
-// * \param arrayPubli Array de Publicacion a ser actualizado
-// * \param limitePubli Limite del array de Publicacion
-// * \param arrayCli Array de Clientes a ser actualizado
-// * \param limiteCli Limite del Clientes de Publicacion
-// * \return Retorna int numero maximo de Publicaciones contratadas por el mismo cliente (EXITO) y -1 (ERROR)
-// */
-//int info_DevolverCantMayorPublicaciones(Publicacion* arrayPubli,int limitePubli,Cliente* arrayCli,int limiteCli, int id)
-//{
-//	int ret = -1;
-//	int i;
-//	int contPublicaciones;
-//	int max;
-//	if(arrayPubli != NULL && limitePubli > 0 && arrayCli != NULL && limiteCli > 0)
-//	{
-//		max = info_devolverPrimerAvisoContado(arrayPubli, limitePubli, id);
-//		for(i=0;i<limiteCli;i++)
-//		{
-//			if(arrayCli[i].isEmpty==FALSE)
-//			{
-//				contPublicaciones = publi_contarPublicacionesPorID(arrayPubli, limitePubli, arrayCli[i].id);
-//				if(contPublicaciones > max)
-//				{
-//					max = contPublicaciones;
-//				}
-//			}
-//		}
-//		ret = max;
-//	}
-//	return ret;
-//}
-
-///**
-// * \brief Devuelve el primer aviso contado
-// * \param array Array de Publicacion a ser actualizado
-// * \param limite int del array de Publicacion
-// * \param id int ID de la Publicacion
-// * \return Retorna la cantidad de Publicaciones resultado de la suma o -1 (ERROR)
-// */
-//int info_devolverPrimerAvisoContado(Publicacion* array, int limite, int id)
-//{
-//	int ret = -1;
-//	int i;
-//	int contador = 0;
-//	if(array!=NULL && limite>0 && id>0)
-//	{
-//		for(i=0; i<limite; i++)
-//		{
-//			if((array[i].IdCliente == id) && (array[i].isEmpty == FALSE))
-//			{
-//				if(i==0)
-//				{
-//					contador++;
-//				}
-//			}
-//		}
-//		ret = contador;
-//	}
-//	return ret;
-//}
 
 /**
  * \brief Imprime los datos del Cliente con mas avisos publicados
@@ -390,4 +329,5 @@ int info_calculaRubrosConMasAvisos(Publicacion* arrayPubli,int limitePubli,Rubro
 	}
 	return ret;
 }
+
 
