@@ -271,10 +271,10 @@ int main(void) {
 					{
 						if(!utn_getNumero(	&optionMenu,
 											"\n*****Informar*****\n"
-											"1 -Cliente con mas avisos\n"
-											"2 -Cantidad de avisos pausados\n"
-											"3 -Rubro con mas avisos\n"
-											"4 -Volver al Menu Principal.\n"
+											"1-Cliente con mas avisos\n"
+											"2-Cantidad de avisos pausados\n"
+											"3-Rubro con mas avisos\n"
+											"4-Volver al Menu Principal.\n"
 											"-----------------------------\n"
 											"Elija una Opcion del Menu: ",
 											"ERROR",MIN_OPTION_MENU,MAX_OPTION_MENU_INFO,QTY_REINT))

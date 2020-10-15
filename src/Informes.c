@@ -121,8 +121,14 @@ int info_calculaClientesConMasAvisos(Publicacion* arrayPubli,int limitePubli,Cli
 			{
 				if(arrayCli[i].isEmpty==FALSE)
 				{
+					//contPublicaciones es la cantidad de Publicaciones que tiene cada cliente
+					/*Se la pasa como parametro el ID del array Cliente y despues compara que sea el mismo que el
+					IdCliente del Array Publicaciones y los cuenta, eso me da la cantidad de Publicaciones, del Cliente
+					que se le paso*/
 					contPublicaciones = publi_contarPublicacionesPorID(arrayPubli, limitePubli, arrayCli[i].id);
+					//Devuelve la Mayor Publicacion contada
 					auxMayor = info_DevolverCantMayorPublicaciones(arrayPubli, limitePubli, arrayCli, limiteCli,arrayCli[i].id);
+					//Comparo y si la mayor Publicacion coincide con alguna de las Publicaciones contadas, esa es la mayor.
 					if(auxMayor == contPublicaciones)
 					{
 						printf("ID:%d - Nombre:%s - Apellido:%s - Cuit:%s - Cantidad de Avisos:%d\n",

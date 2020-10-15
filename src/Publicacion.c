@@ -732,15 +732,13 @@ int publi_imprimirCantidadPublicacionesDeClientes(Publicacion* arrayPubli,int li
 	int ret = -1;
 	int i;
 	int contPublicaciones;
-	int auxId;
 	if(arrayPubli != NULL && limitePubli > 0 && arrayCli != NULL && limiteCli > 0)
 	{
 		for(i=0;i<limiteCli;i++)
 		{
 			if(arrayCli[i].isEmpty==FALSE)
 			{
-				auxId = arrayCli[i].id;
-				contPublicaciones = publi_contarPublicacionesActivasPorID(arrayPubli, limitePubli, auxId);
+				contPublicaciones = publi_contarPublicacionesActivasPorID(arrayPubli, limitePubli, arrayCli[i].id);
 				if(contPublicaciones!=0)
 				{
 					printf("ID:%d - Nombre:%s - Apellido:%s - Cuit:%s - Cantidad de Avisos Activos:%d\n",
