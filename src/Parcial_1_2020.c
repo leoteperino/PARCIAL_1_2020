@@ -38,11 +38,11 @@ int main(void) {
 	cliente_mocksCliente(clientes, LENGTH_CLIENTE,"Cliente5", "Apellido5", "00-00000000-5");
 	//Mocks Publicaciones
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,1,"Texto 1",4);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 2",4);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 3",4);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 4",3);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 2",5);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 3",3);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,2,"Texto 4",5);
 	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,3,"Texto 5",3);
-	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,3,"Texto 6",3);
+	publi_mocksPublicacion(publicaciones,LENGTH_PUBLI,3,"Texto 6",5);
 	//Menu Principal
 	do
 	{
@@ -360,9 +360,6 @@ int main(void) {
 									else
 									{
 										printf("El cliente con mayor cantidad de avisos pausados es:\n");
-										//info_calculaClientesConMasAvisosPausados(publicaciones, LENGTH_PUBLI, clientes, LENGTH_CLIENTE);
-//										auxId =info_contarPublicacionesPorIDPausadas(publicaciones, LENGTH_PUBLI, 4);
-//										printf("%d", auxId);
 										info_calculaClientesConMasAvisosPausados(publicaciones, LENGTH_PUBLI, clientes, LENGTH_CLIENTE);
 									}
 									printf("\n***************************************\n");

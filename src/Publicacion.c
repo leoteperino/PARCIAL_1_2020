@@ -557,7 +557,6 @@ int publi_mocksPublicacion(Publicacion* array,int limite,int rubro,char* texto,i
 	return ret;
 }
 
-
 /**
  * \brief Imprime el array de Publicaciones del ID pasado por parametro
  * \param array Array de Publicaciones a ser actualizado

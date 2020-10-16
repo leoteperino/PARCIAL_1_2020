@@ -23,7 +23,6 @@ static int cliente_generarNuevoId (void) {
  * \param array Array de Clientees a ser actualizado
  * \param limite Limite del array de Clientees
  * \return Retorna 0 (EXITO) y -1 (ERROR)
- *
  */
 int cliente_imprimirArrayCliente(Cliente* array,int limite)
 {
